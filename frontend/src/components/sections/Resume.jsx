@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Container,
@@ -13,7 +13,42 @@ import {
 } from '../ui';
 import { fadeUp } from '../../lib/animations';
 
+const RESUME_URL = '/resume.pdf';
+const RESUME_DOWNLOAD_NAME = 'Pramod_Kumar_Mahato_Resume.pdf';
+const RESUME_PREVIEW_URL = '/resume.pdf#toolbar=0&navpanes=0&scrollbar=0';
+
 export function Resume() {
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    setDownloadError(false);
+    try {
+      const response = await fetch(RESUME_URL);
+      if (!response.ok) {
+        throw new Error('Failed to download resume');
+      }
+      const contentType = response.headers.get('content-type');
+      if (contentType && !contentType.includes('application/pdf')) {
+        throw new Error('Resume response is not a PDF');
+      }
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = RESUME_DOWNLOAD_NAME;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch {
+      setDownloadError(true);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   return (
     <Section id="resume" variant="surface">
       <Container>
@@ -58,7 +93,7 @@ export function Resume() {
                 <Button
                   size="lg"
                   as="a"
-                  href="/resume.pdf"
+                  href={RESUME_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 sm:flex-none"
@@ -80,12 +115,12 @@ export function Resume() {
                 <Button
                   variant="outline"
                   size="lg"
-                  as="a"
-                  href="/resume.pdf"
-                  download="Pramod_Kumar_Mahato_Resume.pdf"
+                  onClick={handleDownload}
+                  disabled={isDownloading}
+                  className="flex-1 sm:flex-none"
                 >
                   <svg
-                    className="w-4 h-4 mr-2"
+                    className={`w-4 h-4 mr-2 ${isDownloading ? 'animate-spin' : ''}`}
                     aria-hidden="true"
                     viewBox="0 0 24 24"
                     fill="none"
@@ -96,7 +131,7 @@ export function Resume() {
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" y1="15" x2="12" y2="3" />
                   </svg>
-                  Download Resume
+                  {isDownloading ? 'Downloading...' : downloadError ? 'Download Failed' : 'Download Resume'}
                 </Button>
               </div>
 
@@ -104,7 +139,7 @@ export function Resume() {
                 <h4 className="text-body-sm font-semibold text-text-primary mb-4">PDF Preview</h4>
                 <div className="rounded-lg border border-border overflow-hidden bg-surface-elevated">
                   <iframe
-                    src="/resume.pdf"
+                    src={RESUME_PREVIEW_URL}
                     title="Pramod Kumar Mahato Resume"
                     className="w-full"
                     style={{ height: '600px' }}
@@ -113,7 +148,7 @@ export function Resume() {
                 <p className="mt-3 text-body-sm text-text-muted">
                   If the preview doesn&apos;t load,{' '}
                   <a
-                    href="/resume.pdf"
+                    href={RESUME_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:text-primary-hover underline"
