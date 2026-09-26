@@ -3,9 +3,8 @@ import { motion } from 'framer-motion';
 import { MapPin, CheckCircle } from 'lucide-react';
 import { Container, Section, SectionHeading, Card, Badge } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
-import profileData from '../../data/profile.json';
 
-export function Experience() {
+export function Experience({ profile }) {
   return (
     <Section id="experience" variant="surface">
       <Container>
@@ -18,7 +17,7 @@ export function Experience() {
         </motion.div>
 
         <motion.div {...staggerContainer} className="space-y-6 max-w-4xl mx-auto">
-          {profileData.experience.map((exp, _index) => (
+          {profile.experience.map((exp, _index) => (
             <Card
               key={exp.id}
               variant="interactive"

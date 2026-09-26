@@ -13,7 +13,6 @@ import {
   Badge,
 } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
-import profileData from '../../data/profile.json';
 
 const infoItems = [
   { icon: MapPin, label: 'Location', value: 'Noida, India' },
@@ -22,7 +21,7 @@ const infoItems = [
   { icon: Target, label: 'Primary Focus', value: 'AI/ML Engineering & Full Stack Development' },
 ];
 
-export function About() {
+export function About({ profile }) {
   return (
     <Section id="about" variant="surface">
       <Container>
@@ -30,7 +29,7 @@ export function About() {
           <SectionHeading
             eyebrow="ABOUT"
             title="Building intelligent systems that solve real problems."
-            description={profileData.bio}
+            description={profile.bio}
           />
         </motion.div>
 

@@ -1,7 +1,13 @@
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import get_settings
-from routers import profile
+from routers import profile_router, contact_router, health_router
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 
 settings = get_settings()
 
@@ -21,17 +27,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(profile.router, prefix=settings.api_v1_prefix)
+app.include_router(health_router, prefix=settings.api_v1_prefix)
+app.include_router(profile_router, prefix=settings.api_v1_prefix)
+app.include_router(contact_router, prefix=settings.api_v1_prefix)
 
 
 @app.get("/")
 async def root():
     return {"message": "Welcome to Portfolio API", "version": "1.0.0"}
-
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
 
 
 if __name__ == "__main__":

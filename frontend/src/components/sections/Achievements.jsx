@@ -13,7 +13,6 @@ import {
   Button,
 } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
-import profileData from '../../data/profile.json';
 
 const achievementIcons = {
   trophy: Trophy,
@@ -21,7 +20,7 @@ const achievementIcons = {
   star: Star,
 };
 
-export function Achievements() {
+export function Achievements({ profile }) {
   return (
     <Section id="achievements" variant="surface">
       <Container>
@@ -37,7 +36,7 @@ export function Achievements() {
           {...staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {profileData.achievements.map((achievement, _index) => {
+          {profile.achievements.map((achievement, _index) => {
             const Icon = achievementIcons[achievement.icon] || Trophy;
             return (
               <Card

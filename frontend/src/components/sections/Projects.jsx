@@ -16,14 +16,13 @@ import {
   Button,
 } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
-import profileData from '../../data/profile.json';
 
 const projectIcons = {
   'TripMate AI': Brain,
   'HR Policy RAG Assistant': Network,
 };
 
-export function Projects() {
+export function Projects({ profile }) {
   return (
     <Section id="projects" variant="default">
       <Container>
@@ -39,7 +38,7 @@ export function Projects() {
           {...staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"
         >
-          {profileData.projects.map((project, _index) => {
+          {profile.projects.map((project, _index) => {
             const ProjectIcon = projectIcons[project.title] || Brain;
             return (
               <Card

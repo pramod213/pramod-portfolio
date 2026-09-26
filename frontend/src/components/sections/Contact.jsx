@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, GitBranch, Send, ExternalLink, MessageSquare } from 'lucide-react';
 import {
@@ -14,7 +14,7 @@ import {
   Badge,
 } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
-import profileData from '../../data/profile.json';
+import { submitContact } from '../../lib/api';
 
 function LinkedInIcon({ className, ...props }) {
   return (
@@ -30,34 +30,58 @@ function LinkedInIcon({ className, ...props }) {
   );
 }
 
-const socialLinks = [
-  {
-    href: `mailto:${profileData.email}`,
-    icon: Mail,
-    label: 'Email',
-    color: 'text-primary',
-    description: 'Best for project inquiries',
-    external: false,
-  },
-  {
-    href: profileData.github,
-    icon: GitBranch,
-    label: 'GitHub',
-    color: 'text-text-secondary',
-    description: 'View my code & projects',
-    external: true,
-  },
-  {
-    href: profileData.linkedin,
-    icon: LinkedInIcon,
-    label: 'LinkedIn',
-    color: 'text-text-secondary',
-    description: 'Professional updates',
-    external: true,
-  },
-].filter(link => link.href);
+export function Contact({ profile }) {
+  const [formState, setFormState] = useState('idle'); // idle, submitting, success, error
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formError, setFormError] = useState(null);
 
-export function Contact() {
+  const socialLinks = [
+    {
+      href: `mailto:${profile.email}`,
+      icon: Mail,
+      label: 'Email',
+      color: 'text-primary',
+      description: 'Best for project inquiries',
+      external: false,
+    },
+    {
+      href: profile.github,
+      icon: GitBranch,
+      label: 'GitHub',
+      color: 'text-text-secondary',
+      description: 'View my code & projects',
+      external: true,
+    },
+    {
+      href: profile.linkedin,
+      icon: LinkedInIcon,
+      label: 'LinkedIn',
+      color: 'text-text-secondary',
+      description: 'Professional updates',
+      external: true,
+    },
+  ].filter(link => link.href);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setFormState('submitting');
+    setFormError(null);
+
+    try {
+      await submitContact(formData);
+      setFormState('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      setFormState('error');
+      setFormError(err.message || 'Failed to send message. Please try again.');
+    }
+  };
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <Section id="contact" variant="default">
       <Container>
@@ -112,7 +136,7 @@ export function Contact() {
                 <h4 className="text-body-sm font-semibold text-text-primary mb-3">
                   Or send a quick message
                 </h4>
-                <form className="space-y-4" onSubmit={e => e.preventDefault()}>
+                <form onSubmit={handleSubmit} className="space-y-4" aria-live="polite">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -124,7 +148,11 @@ export function Contact() {
                       <input
                         type="text"
                         id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="Your name"
+                        required
                         className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors"
                       />
                     </div>
@@ -138,7 +166,11 @@ export function Contact() {
                       <input
                         type="email"
                         id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="your@email.com"
+                        required
                         className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors"
                       />
                     </div>
@@ -153,7 +185,11 @@ export function Contact() {
                     <input
                       type="text"
                       id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
                       placeholder="Project inquiry, collaboration, etc."
+                      required
                       className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors"
                     />
                   </div>
@@ -166,19 +202,59 @@ export function Contact() {
                     </label>
                     <textarea
                       id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       rows={4}
                       placeholder="Tell me about your project or idea..."
+                      required
                       className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors resize-none"
                     />
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button type="submit" disabled className="opacity-50 cursor-not-allowed">
-                      <Send className="w-4 h-4 mr-2" aria-hidden="true" />
-                      Send Message
+                    <Button type="submit" disabled={formState === 'submitting'}>
+                      {formState === 'submitting' ? (
+                        <>
+                          <svg
+                            className="animate-spin w-4 h-4 mr-2"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            />
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" aria-hidden="true" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
-                    <Badge variant="outline" size="sm" className="text-text-muted">
-                      API integration coming in Phase 4
-                    </Badge>
+                    {formState === 'success' && (
+                      <Badge variant="success" size="sm">
+                        Message sent successfully!
+                      </Badge>
+                    )}
+                    {formState === 'error' && (
+                      <Badge variant="error" size="sm">
+                        {formError}
+                      </Badge>
+                    )}
                   </div>
                 </form>
               </div>

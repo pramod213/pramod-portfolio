@@ -4,7 +4,6 @@ import { ExternalLink, ChevronDown, Code, Zap, Brain, Network } from 'lucide-rea
 import { Container, Section, Button } from '../ui';
 import { fadeUp } from '../../lib/animations';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import profileData from '../../data/profile.json';
 
 const techStack = [
   { name: 'LangChain', icon: Network, color: 'text-primary' },
@@ -13,7 +12,7 @@ const techStack = [
   { name: 'FastAPI', icon: Code, color: 'text-success' },
 ];
 
-export function Hero() {
+export function Hero({ profile }) {
   const [currentTechIndex, setCurrentTechIndex] = useState(0);
   const reducedMotion = useReducedMotion();
 
@@ -67,7 +66,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Pramod Kumar Mahato
+              {profile.name}
             </motion.p>
 
             <motion.p
@@ -76,7 +75,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              {profileData.bio}
+              {profile.bio}
             </motion.p>
 
             <motion.div
@@ -113,12 +112,12 @@ export function Hero() {
               <Button variant="outline" size="lg" as="a" href="#contact">
                 Contact Me
               </Button>
-              {profileData.resume && (
+              {profile.resume && (
                 <Button
                   variant="ghost"
                   size="lg"
                   as="a"
-                  href={profileData.resume}
+                  href={profile.resume}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

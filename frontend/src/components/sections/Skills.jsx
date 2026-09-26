@@ -14,7 +14,6 @@ import {
   BadgeGroup,
 } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
-import profileData from '../../data/profile.json';
 
 const categoryIcons = {
   'AI / LLM Engineering': Brain,
@@ -34,16 +33,16 @@ const categoryOrder = [
   'Tools & Architecture',
 ];
 
-export function Skills() {
+export function Skills({ profile }) {
   const skillsByCategory = useMemo(() => {
-    const grouped = profileData.skills.reduce((acc, skill) => {
+    const grouped = profile.skills.reduce((acc, skill) => {
       if (!acc[skill.category]) acc[skill.category] = [];
       acc[skill.category].push(skill);
       return acc;
     }, {});
 
     return categoryOrder.filter(cat => grouped[cat]).map(cat => [cat, grouped[cat]]);
-  }, []);
+  }, [profile.skills]);
 
   return (
     <Section id="skills" variant="default">

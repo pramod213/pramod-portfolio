@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List, Any
 from datetime import date
 
 
@@ -13,10 +13,12 @@ class Project(BaseModel):
     id: str
     title: str
     description: str
-    technologies: list[str]
+    technologies: List[str]
     link: Optional[str] = None
     github: Optional[str] = None
     featured: bool = False
+    highlights: List[str] = []
+    architecture: Optional[str] = None
 
 
 class Experience(BaseModel):
@@ -24,16 +26,28 @@ class Experience(BaseModel):
     role: str
     company: str
     period: str
+    location: Optional[str] = None
     description: str
-    technologies: list[str] = []
+    technologies: List[str] = []
 
 
 class Education(BaseModel):
     id: str
     degree: str
+    field: Optional[str] = None
     institution: str
     period: str
     description: Optional[str] = None
+
+
+class Achievement(BaseModel):
+    id: str
+    title: str
+    event: str
+    organization: str
+    date: str
+    description: str
+    icon: str
 
 
 class Profile(BaseModel):
@@ -44,7 +58,9 @@ class Profile(BaseModel):
     github: Optional[str] = None
     linkedin: Optional[str] = None
     twitter: Optional[str] = None
-    skills: list[Skill] = []
-    projects: list[Project] = []
-    experience: list[Experience] = []
-    education: list[Education] = []
+    resume: Optional[str] = None
+    skills: List[Skill] = []
+    projects: List[Project] = []
+    experience: List[Experience] = []
+    education: List[Education] = []
+    achievements: List[Achievement] = []

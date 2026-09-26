@@ -1,0 +1,281 @@
+{
+  "name": "Pramod Kumar Mahato",
+  "title": "AI / Machine Learning Engineer | Full Stack Developer",
+  "bio": "AI/ML Engineer specializing in building production-ready intelligent systems. Expertise in LangChain, LangGraph, RAG pipelines, Multi-Agent Systems, and FastAPI. Passionate about bridging the gap between AI research and real-world applications through robust engineering practices.",
+  "email": "pramodkmahato@gmail.com",
+  "github": "https://github.com/pramodkmahato",
+  "linkedin": "https://linkedin.com/in/pramodkmahato",
+  "resume": null,
+  "skills": [
+    {
+      "name": "LangChain",
+      "category": "AI / LLM Engineering",
+      "level": 5
+    },
+    {
+      "name": "LangGraph",
+      "category": "AI / LLM Engineering",
+      "level": 5
+    },
+    {
+      "name": "RAG Pipelines",
+      "category": "AI / LLM Engineering",
+      "level": 5
+    },
+    {
+      "name": "Multi-Agent Systems",
+      "category": "AI / LLM Engineering",
+      "level": 5
+    },
+    {
+      "name": "Supervisor Agents",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "AI Guardrails",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "HITL (Human-in-the-Loop)",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "MCP (Model Context Protocol)",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "LangSmith",
+      "category": "AI / LLM Engineering",
+      "level": 3
+    },
+    {
+      "name": "Prompt Engineering",
+      "category": "AI / LLM Engineering",
+      "level": 5
+    },
+    {
+      "name": "Groq",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "FAISS",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "Pinecone",
+      "category": "AI / LLM Engineering",
+      "level": 3
+    },
+    {
+      "name": "Sentence Transformers",
+      "category": "AI / LLM Engineering",
+      "level": 4
+    },
+    {
+      "name": "Python",
+      "category": "Backend & APIs",
+      "level": 5
+    },
+    {
+      "name": "FastAPI",
+      "category": "Backend & APIs",
+      "level": 5
+    },
+    {
+      "name": "REST API Design",
+      "category": "Backend & APIs",
+      "level": 4
+    },
+    {
+      "name": "Microservices",
+      "category": "Backend & APIs",
+      "level": 3
+    },
+    {
+      "name": "Async Programming",
+      "category": "Backend & APIs",
+      "level": 4
+    },
+    {
+      "name": "Streamlit",
+      "category": "Backend & APIs",
+      "level": 4
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Data & Storage",
+      "level": 4
+    },
+    {
+      "name": "MySQL",
+      "category": "Data & Storage",
+      "level": 3
+    },
+    {
+      "name": "MongoDB",
+      "category": "Data & Storage",
+      "level": 3
+    },
+    {
+      "name": "Redis",
+      "category": "Data & Storage",
+      "level": 3
+    },
+    {
+      "name": "FAISS",
+      "category": "Data & Storage",
+      "level": 4
+    },
+    {
+      "name": "Pinecone",
+      "category": "Data & Storage",
+      "level": 3
+    },
+    {
+      "name": "Data Ingestion Pipelines",
+      "category": "Data & Storage",
+      "level": 4
+    },
+    {
+      "name": "Docker",
+      "category": "Cloud & DevOps",
+      "level": 4
+    },
+    {
+      "name": "CI/CD",
+      "category": "Cloud & DevOps",
+      "level": 3
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "Cloud & DevOps",
+      "level": 3
+    },
+    {
+      "name": "Git",
+      "category": "Cloud & DevOps",
+      "level": 5
+    },
+    {
+      "name": "Render",
+      "category": "Cloud & DevOps",
+      "level": 3
+    },
+    {
+      "name": "Cloud Deployment",
+      "category": "Cloud & DevOps",
+      "level": 3
+    },
+    {
+      "name": "JavaScript",
+      "category": "Frontend",
+      "level": 4
+    },
+    {
+      "name": "React.js",
+      "category": "Frontend",
+      "level": 3
+    },
+    {
+      "name": "Streamlit",
+      "category": "Frontend",
+      "level": 4
+    },
+    {
+      "name": "Tavily",
+      "category": "Tools & Architecture",
+      "level": 4
+    },
+    {
+      "name": "AviationStack",
+      "category": "Tools & Architecture",
+      "level": 4
+    },
+    {
+      "name": "MVC Architecture",
+      "category": "Tools & Architecture",
+      "level": 4
+    },
+    {
+      "name": "RBAC",
+      "category": "Tools & Architecture",
+      "level": 3
+    }
+  ],
+  "projects": [
+    {
+      "id": "tripMate-ai",
+      "title": "TripMate AI",
+      "description": "A multi-agent travel planning system built with LangGraph that orchestrates specialized agents for flight search, hotel recommendations, itinerary generation, and real-time travel assistance. Features a Supervisor Agent for coordination, persistent state management, and human-in-the-loop approval workflows.",
+      "technologies": ["Python", "FastAPI", "LangGraph", "LangChain", "Groq", "MCP", "PostgreSQL", "Tavily", "AviationStack", "HITL", "AI Guardrails", "Docker"],
+      "link": null,
+      "github": null,
+      "featured": true,
+      "highlights": [
+        "Multi-agent architecture with Supervisor Agent coordination",
+        "Persistent state management across conversation turns",
+        "Tool/API integrations: Tavily (search), AviationStack (flights)",
+        "Human-in-the-loop approval for critical actions",
+        "AI Guardrails for safe and reliable agent behavior",
+        "Containerized deployment with Docker"
+      ],
+      "architecture": "LangGraph-based multi-agent system with Supervisor pattern. Agents: FlightSearch, HotelRecommendation, ItineraryGenerator, TravelAssistant. State persisted in PostgreSQL. MCP for tool integration."
+    },
+    {
+      "id": "hr-policy-rag",
+      "title": "HR Policy RAG Assistant",
+      "description": "A Retrieval-Augmented Generation system for HR policy queries. Implements document ingestion, semantic chunking, vector storage with FAISS, and contextual response generation. Provides accurate, source-cited answers to employee policy questions through a Streamlit interface.",
+      "technologies": ["Python", "LangChain", "Groq", "FAISS", "Sentence Transformers", "Streamlit", "RAG"],
+      "link": null,
+      "github": null,
+      "featured": true,
+      "highlights": [
+        "Document ingestion and semantic chunking pipeline",
+        "Vector storage with FAISS for efficient similarity search",
+        "Contextual response generation with source citations",
+        "RAG pipeline: Retrieval → Augmentation → Generation",
+        "Streamlit-based interactive chat interface",
+        "Optimized retrieval with sentence transformers"
+      ],
+      "architecture": "LangChain RAG pipeline with FAISS vector store. Embeddings via Sentence Transformers. LLM: Groq. Frontend: Streamlit. Modular design for easy document updates."
+    }
+  ],
+  "experience": [
+    {
+      "id": "intern-excellence",
+      "role": "Full Stack Developer Intern",
+      "company": "Excellence Technologies Pvt. Ltd.",
+      "period": "April 2026 \u2013 July 2026",
+      "location": "Noida Sector 8",
+      "description": "Developed production-grade AI/ML applications using Python, FastAPI, LangChain, and LangGraph. Built TripMate AI (multi-agent travel system) and HR Policy RAG Assistant. Worked with Groq, FAISS, PostgreSQL, MCP, and Docker for containerized deployment.",
+      "technologies": ["Python", "FastAPI", "JavaScript", "Streamlit", "LangChain", "LangGraph", "Groq", "FAISS", "PostgreSQL", "MCP", "Docker"]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "hackathon-runner-up",
+      "title": "1st Runner-Up",
+      "event": "Roorkee Institute of Technology Hackathon",
+      "organization": "HackIndia",
+      "date": "2024",
+      "description": "Secured 1st Runner-Up position among 50+ teams at the Roorkee Institute of Technology Hackathon organized by HackIndia.",
+      "icon": "trophy"
+    }
+  ],
+  "education": [
+    {
+      "id": "btech",
+      "degree": "Bachelor of Technology",
+      "field": "Computer Science & Engineering",
+      "institution": "Roorkee Institute of Technology",
+      "period": "2021 \u2013 2025",
+      "description": "Focus on AI/ML, Data Structures, Algorithms, and Software Engineering"
+    }
+  ]
+}

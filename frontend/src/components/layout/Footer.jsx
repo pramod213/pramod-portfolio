@@ -1,7 +1,6 @@
 import React from 'react';
 import { Mail, GitBranch, ExternalLink } from 'lucide-react';
 import { Container } from '../ui';
-import profileData from '../../data/profile.json';
 
 function LinkedInIcon({ className, ...props }) {
   return (
@@ -17,36 +16,31 @@ function LinkedInIcon({ className, ...props }) {
   );
 }
 
-const socialLinks = [
-  { href: `mailto:${profileData.email}`, icon: Mail, label: 'Email', external: false },
-  { href: profileData.github, icon: GitBranch, label: 'GitHub', external: true },
-  { href: profileData.linkedin, icon: LinkedInIcon, label: 'LinkedIn', external: true },
-];
-
-const footerNavItems = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#achievements', label: 'Achievements' },
-  { href: '#contact', label: 'Contact' },
-];
-
-export function Footer() {
+export function Footer({ profile }) {
   const currentYear = new Date().getFullYear();
+
+  const socialLinks = [
+    { href: `mailto:${profile.email}`, icon: Mail, label: 'Email', external: false },
+    { href: profile.github, icon: GitBranch, label: 'GitHub', external: true },
+    { href: profile.linkedin, icon: LinkedInIcon, label: 'LinkedIn', external: true },
+  ];
+
+  const footerNavItems = [
+    { href: '#about', label: 'About' },
+    { href: '#skills', label: 'Skills' },
+    { href: '#experience', label: 'Experience' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#achievements', label: 'Achievements' },
+    { href: '#contact', label: 'Contact' },
+  ];
 
   return (
     <footer className="bg-surface border-t border-border">
       <Container className="py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           <div className="max-w-xs">
-            <h3 className="text-heading-sm font-bold text-text-primary mb-4">
-              Pramod Kumar Mahato
-            </h3>
-            <p className="text-text-secondary text-body-sm mb-6 leading-relaxed">
-              AI/ML Engineer building production-ready intelligent systems. Specializing in
-              LangChain, LangGraph, RAG pipelines, and Multi-Agent Systems.
-            </p>
+            <h3 className="text-heading-sm font-bold text-text-primary mb-4">{profile.name}</h3>
+            <p className="text-text-secondary text-body-sm mb-6 leading-relaxed">{profile.title}</p>
             <div className="flex space-x-4">
               {socialLinks.map(link => (
                 <a
@@ -87,19 +81,18 @@ export function Footer() {
               Open to opportunities in AI/ML Engineering and Full Stack Development.
             </p>
             <a
-              href={`mailto:${profileData.email}`}
+              href={`mailto:${profile.email}`}
               className="inline-flex items-center gap-2 text-primary hover:text-primary-hover transition-colors duration-fast text-body-sm font-medium"
             >
               <Mail className="w-4 h-4" aria-hidden="true" />
-              {profileData.email}
+              {profile.email}
             </a>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <p className="text-text-muted text-body-sm">
-            &copy; {currentYear} Pramod Kumar Mahato. Built with React, TailwindCSS, and Framer
-            Motion.
+            &copy; {currentYear} {profile.name}. Built with React, TailwindCSS, and Framer Motion.
           </p>
           <div className="flex items-center gap-6">
             <a
