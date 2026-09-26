@@ -1,0 +1,48 @@
+services:
+  # Frontend Web Service
+  - type: web
+    name: portfolio-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    plan: free
+    buildCommand: ""
+    startCommand: ""
+    healthCheckPath: /
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: portfolio-backend
+          type: web
+          property: host
+        transform: "https://${host}/api/v1"
+
+  # Backend Web Service
+  - type: web
+    name: portfolio-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    buildCommand: ""
+    startCommand: ""
+    healthCheckPath: /api/v1/health/
+    envVars:
+      - key: APP_NAME
+        value: Portfolio API
+      - key: DEBUG
+        value: "false"
+      - key: API_V1_PREFIX
+        value: /api/v1
+      - key: CORS_ORIGINS
+        fromService:
+          name: portfolio-frontend
+          type: web
+          property: host
+        transform: '["https://${host}"]'
+      - key: FRONTEND_URL
+        fromService:
+          name: portfolio-frontend
+          type: web
+          property: host
+        transform: "https://${host}"

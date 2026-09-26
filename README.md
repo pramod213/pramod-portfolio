@@ -7,7 +7,9 @@ A full-stack portfolio application with React frontend and FastAPI backend.
 ```
 project-root/
 ├── frontend/          # React + Vite + TailwindCSS + Framer Motion
-└── backend/           # FastAPI + Python 3.12+
+├── backend/           # FastAPI + Python 3.12+
+├── docker-compose.yml # Local production-like deployment
+└── render.yaml        # Render deployment configuration
 ```
 
 ## Frontend Setup
@@ -91,11 +93,116 @@ Copy `.env.example` to `.env` and configure:
 cp .env.example .env
 ```
 
+## Docker Deployment (Local)
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Build and Run
+
+```bash
+# Build images
+docker compose build
+
+# Start services
+docker compose up -d
+
+# View logs
+docker compose logs -f
+
+# Stop services
+docker compose down
+```
+
+Services:
+- Frontend: http://localhost (port 80)
+- Backend: http://localhost:8000
+- API Health: http://localhost:8000/api/v1/health/
+- API Portfolio: http://localhost:8000/api/v1/portfolio/
+
+### Docker Compose Notes
+- Frontend uses `nginx.conf` with `/api/` proxy to backend
+- Backend listens on port 8000
+- Both services share a Docker network
+
+## Production Deployment (Render)
+
+### Architecture
+
+```
+Internet
+    ↓
+Render
+    ↓
+┌─────────────────┐     ┌─────────────────┐
+│ Frontend Service │     │ Backend Service  │
+│ (Nginx + React)  │────▶│ (FastAPI)        │
+└─────────────────┘     └─────────────────┘
+```
+
+### Deploy via Render Dashboard
+
+1. Connect your GitHub repository to Render
+2. Create a new **Web Service** for the backend:
+   - Runtime: Docker
+   - Dockerfile: `backend/Dockerfile`
+   - Build Context: `./backend`
+   - Health Check Path: `/api/v1/health/`
+   - Environment Variables:
+     - `APP_NAME=Portfolio API`
+     - `DEBUG=false`
+     - `API_V1_PREFIX=/api/v1`
+     - `CORS_ORIGINS=["https://<your-frontend>.onrender.com"]`
+     - `FRONTEND_URL=https://<your-frontend>.onrender.com`
+
+3. Create a new **Web Service** for the frontend:
+   - Runtime: Docker
+   - Dockerfile: `frontend/Dockerfile`
+   - Build Context: `./frontend`
+   - Health Check Path: `/`
+   - Environment Variables:
+     - `VITE_API_BASE_URL=https://<your-backend>.onrender.com/api/v1`
+
+### Deploy via Infrastructure as Code (render.yaml)
+
+The repository includes a `render.yaml` file for Blue/Green deployments:
+
+```bash
+# Install Render CLI
+npm install -g @render/cli
+
+# Deploy
+render deploy
+```
+
+Or use the Render Dashboard "Deploy from Blueprint" feature.
+
+### Environment Variables
+
+**Backend (Production):**
+- `APP_NAME=Portfolio API`
+- `DEBUG=false`
+- `API_V1_PREFIX=/api/v1`
+- `CORS_ORIGINS=["https://<frontend-service>.onrender.com"]`
+- `FRONTEND_URL=https://<frontend-service>.onrender.com`
+
+**Frontend (Production):**
+- `VITE_API_BASE_URL=https://<backend-service>.onrender.com/api/v1`
+
+### Render-Specific Notes
+- Backend binds to `$PORT` (provided by Render) with fallback to 8000
+- Frontend uses production Nginx config (`nginx.prod.conf`) without `/api/` proxy
+- Frontend calls backend directly via `VITE_API_BASE_URL`
+- HTTPS is automatic via Render's `.onrender.com` domains
+- Free tier services spin down after inactivity
+
 ## Available API Endpoints
 
 - `GET /` - Root endpoint
-- `GET /health` - Health check
-- `GET /api/v1/profile/` - Get profile data
+- `GET /api/v1/health/` - Health check
+- `GET /api/v1/portfolio/` - Get portfolio data
+- `POST /api/v1/contact/` - Submit contact form
 
 ## Tech Stack
 
