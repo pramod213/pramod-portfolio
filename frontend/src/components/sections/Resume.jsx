@@ -108,7 +108,6 @@ export function Resume() {
                     title="Pramod Kumar Mahato Resume"
                     className="w-full"
                     style={{ height: '600px' }}
-                    sandbox="allow-scripts allow-same-origin"
                   />
                 </div>
                 <p className="mt-3 text-body-sm text-text-muted">
