@@ -59,7 +59,7 @@ export function Navbar() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-text-secondary hover:text-text-primary transition-colors duration-fast text-body-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+                className="text-text-secondary hover:text-text-primary transition-colors duration-fast text-body-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {item.label}
               </a>
@@ -69,16 +69,16 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <button
-              className="md:hidden p-2 rounded-lg bg-surface-elevated border border-border hover:bg-surface hover:border-border-hover transition-colors duration-fast"
+              className="md:hidden p-2 rounded-lg bg-surface-elevated border border-border hover:bg-surface hover:border-border-hover transition-colors duration-fast focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-text-primary" />
+                <X className="w-6 h-6 text-text-primary" aria-hidden="true" />
               ) : (
-                <Menu className="w-6 h-6 text-text-primary" />
+                <Menu className="w-6 h-6 text-text-primary" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -88,6 +88,9 @@ export function Navbar() {
           {isMobileMenuOpen && (
             <motion.div
               id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
               className="md:hidden py-4 border-t border-border animate-slide-down"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
@@ -103,7 +106,7 @@ export function Navbar() {
                       e.preventDefault();
                       scrollToSection(item.href);
                     }}
-                    className="px-2 py-2 text-text-secondary hover:text-text-primary transition-colors duration-fast text-body-base font-medium rounded-lg hover:bg-surface-elevated"
+                    className="px-2 py-2 text-text-secondary hover:text-text-primary transition-colors duration-fast text-body-base font-medium rounded-lg hover:bg-surface-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {item.label}
                   </a>

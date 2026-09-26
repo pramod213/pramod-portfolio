@@ -1,33 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, ChevronDown, Code, Zap, Brain, Network } from 'lucide-react';
-import { Container, Section, Button } from '../ui';
+import { ExternalLink, ChevronDown, Code, Brain, Network, FlaskConical, Bot } from 'lucide-react';
+import { Container, Section, Button, Badge } from '../ui';
 import { fadeUp } from '../../lib/animations';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const techStack = [
-  { name: 'LangChain', icon: Network, color: 'text-primary' },
-  { name: 'RAG Pipelines', icon: Brain, color: 'text-warning' },
-  { name: 'Multi-Agent Systems', icon: Zap, color: 'text-secondary' },
-  { name: 'FastAPI', icon: Code, color: 'text-success' },
+  { name: 'LangChain', icon: Network, color: 'text-primary', category: 'AI/ML' },
+  { name: 'RAG Pipelines', icon: Brain, color: 'text-warning', category: 'AI/ML' },
+  { name: 'Multi-Agent Systems', icon: Bot, color: 'text-secondary', category: 'AI/ML' },
+  { name: 'FastAPI', icon: Code, color: 'text-success', category: 'Backend' },
+  { name: 'LangGraph', icon: Network, color: 'text-primary', category: 'AI/ML' },
+  { name: 'Python', icon: FlaskConical, color: 'text-success', category: 'Backend' },
 ];
 
 export function Hero({ profile }) {
-  const [currentTechIndex, setCurrentTechIndex] = useState(0);
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const interval = setInterval(() => {
-      setCurrentTechIndex(prev => (prev + 1) % techStack.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [reducedMotion]);
-
-  const CurrentTechIcon = techStack[currentTechIndex].icon;
-  const currentTechColor = techStack[currentTechIndex].color;
-  const currentTechName = techStack[currentTechIndex].name;
-
   return (
     <Section id="hero" size="lg" variant="default">
       <Container>
@@ -43,12 +29,12 @@ export function Hero({ profile }) {
             className="relative text-center max-w-4xl mx-auto z-10"
             style={{ transitionDelay: '0.1s' }}
           >
-            <span className="inline-block text-meta font-medium uppercase tracking-wider text-primary mb-6">
-              AI / ML ENGINEER
+            <span className="inline-block text-meta font-medium uppercase tracking-wider text-primary mb-4">
+              AI / ML Engineer &bull; Full Stack Developer
             </span>
 
             <motion.h1
-              className="text-heading-xl font-bold text-text-primary mb-6 leading-tight"
+              className="text-heading-xl font-bold text-text-primary mb-4 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -61,7 +47,7 @@ export function Hero({ profile }) {
             </motion.h1>
 
             <motion.p
-              className="text-heading-sm font-medium text-text-secondary mb-4"
+              className="text-heading-sm font-medium text-text-secondary mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -70,7 +56,7 @@ export function Hero({ profile }) {
             </motion.p>
 
             <motion.p
-              className="text-body-lg text-text-secondary mb-10 max-w-3xl mx-auto"
+              className="text-body-lg text-text-secondary mb-8 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -79,23 +65,25 @@ export function Hero({ profile }) {
             </motion.p>
 
             <motion.div
-              className="mb-12"
+              className="mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-surface-elevated/50 border border-border/50 backdrop-blur-sm">
-                <motion.span
-                  key={currentTechIndex}
-                  className="flex items-center gap-2 text-body-sm font-medium text-text-primary"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                >
-                  <CurrentTechIcon className={`w-4 h-4 ${currentTechColor}`} aria-hidden="true" />
-                  {currentTechName}
-                </motion.span>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {techStack.map((tech, _idx) => (
+                  <Badge
+                    key={tech.name}
+                    variant="outline"
+                    size="sm"
+                    dot
+                    dotColor={tech.color}
+                    className="gap-1.5"
+                  >
+                    <tech.icon className={`w-3 h-3 ${tech.color}`} aria-hidden="true" />
+                    {tech.name}
+                  </Badge>
+                ))}
               </div>
             </motion.div>
 
@@ -121,7 +109,19 @@ export function Hero({ profile }) {
                   download={profile.resume.downloadName}
                 >
                   Download Resume
-                  <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                  <svg
+                    className="w-4 h-4"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download Resume
                 </Button>
               )}
             </motion.div>

@@ -50,7 +50,7 @@ export function Skills({ profile }) {
         <motion.div {...fadeUp}>
           <SectionHeading
             eyebrow="SKILLS"
-            title="Technologies & tools I work with."
+            title="Technologies & Tools"
             description="Proficient in modern AI/ML stacks, cloud infrastructure, and full-stack development."
           />
         </motion.div>
@@ -61,6 +61,7 @@ export function Skills({ profile }) {
         >
           {skillsByCategory.map(([category, skills], _index) => {
             const Icon = categoryIcons[category] || Wrench;
+            const sortedSkills = skills.sort((a, b) => b.level - a.level);
             return (
               <Card key={category} variant="interactive" padding="lg" {...staggerItem}>
                 <CardHeader>
@@ -78,19 +79,20 @@ export function Skills({ profile }) {
                 </CardHeader>
                 <CardContent>
                   <BadgeGroup>
-                    {skills
-                      .sort((a, b) => b.level - a.level)
-                      .map(skill => (
-                        <Badge
-                          key={skill.name}
-                          variant="outline"
-                          size="sm"
-                          dot
-                          dotColor={`hsl(${skill.level * 30} 70% 50%)`}
-                        >
-                          {skill.name}
-                        </Badge>
-                      ))}
+                    {sortedSkills.map(skill => (
+                      <Badge
+                        key={skill.name}
+                        variant="outline"
+                        size="sm"
+                        dot
+                        dotColor={`hsl(${skill.level * 30} 70% 50%)`}
+                      >
+                        {skill.name}
+                        <span className="ml-1.5 text-[10px] text-text-muted font-normal">
+                          L{skill.level}
+                        </span>
+                      </Badge>
+                    ))}
                   </BadgeGroup>
                 </CardContent>
               </Card>

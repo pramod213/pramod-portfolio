@@ -136,7 +136,7 @@ export function Contact({ profile }) {
                 <h4 className="text-body-sm font-semibold text-text-primary mb-3">
                   Or send a quick message
                 </h4>
-                <form onSubmit={handleSubmit} className="space-y-4" aria-live="polite">
+                <form onSubmit={handleSubmit} className="space-y-4" aria-live="polite" noValidate>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -153,6 +153,7 @@ export function Contact({ profile }) {
                         onChange={handleChange}
                         placeholder="Your name"
                         required
+                        aria-required="true"
                         className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors"
                       />
                     </div>
@@ -171,6 +172,7 @@ export function Contact({ profile }) {
                         onChange={handleChange}
                         placeholder="your@email.com"
                         required
+                        aria-required="true"
                         className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors"
                       />
                     </div>
@@ -190,6 +192,7 @@ export function Contact({ profile }) {
                       onChange={handleChange}
                       placeholder="Project inquiry, collaboration, etc."
                       required
+                      aria-required="true"
                       className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors"
                     />
                   </div>
@@ -208,11 +211,16 @@ export function Contact({ profile }) {
                       rows={4}
                       placeholder="Tell me about your project or idea..."
                       required
+                      aria-required="true"
                       className="w-full px-4 py-2.5 rounded-lg bg-surface border border-border text-text-primary placeholder-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors resize-none"
                     />
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button type="submit" disabled={formState === 'submitting'}>
+                    <Button
+                      type="submit"
+                      disabled={formState === 'submitting'}
+                      aria-busy={formState === 'submitting'}
+                    >
                       {formState === 'submitting' ? (
                         <>
                           <svg
@@ -246,12 +254,12 @@ export function Contact({ profile }) {
                       )}
                     </Button>
                     {formState === 'success' && (
-                      <Badge variant="success" size="sm">
+                      <Badge variant="success" size="sm" role="status" aria-live="polite">
                         Message sent successfully!
                       </Badge>
                     )}
                     {formState === 'error' && (
-                      <Badge variant="error" size="sm">
+                      <Badge variant="error" size="sm" role="alert">
                         {formError}
                       </Badge>
                     )}

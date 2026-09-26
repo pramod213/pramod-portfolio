@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle } from 'lucide-react';
 import { Container, Section, SectionHeading, Card, Badge } from '../ui';
 import { fadeUp, staggerContainer, staggerItem } from '../../lib/animations';
 
@@ -40,7 +39,14 @@ export function Experience({ profile }) {
                         {exp.period}
                       </Badge>
                       <Badge variant="outline" size="sm" dot dotColor="text-secondary">
-                        <MapPin className="w-3 h-3" aria-hidden="true" />
+                        <svg
+                          className="w-3 h-3"
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-12 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.586 7 2.586v6.75z" />
+                        </svg>
                         {exp.location}
                       </Badge>
                     </div>
@@ -66,10 +72,16 @@ export function Experience({ profile }) {
                           key={idx}
                           className="flex items-center gap-2 text-text-secondary text-body-sm"
                         >
-                          <CheckCircle
+                          <svg
                             className="w-4 h-4 text-primary flex-shrink-0"
                             aria-hidden="true"
-                          />
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
                           <span>{item}</span>
                         </div>
                       ))}
