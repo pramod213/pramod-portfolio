@@ -108,7 +108,6 @@ export function Hero({ profile }) {
                   href={profile.resume.url}
                   download={profile.resume.downloadName}
                 >
-                  Download Resume
                   <svg
                     className="w-4 h-4"
                     aria-hidden="true"

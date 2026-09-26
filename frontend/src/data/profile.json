@@ -218,7 +218,7 @@
       "description": "A multi-agent travel planning system built with LangGraph that orchestrates specialized agents for flight search, hotel recommendations, itinerary generation, and real-time travel assistance. Features a Supervisor Agent for coordination, persistent state management, and human-in-the-loop approval workflows.",
       "technologies": ["Python", "FastAPI", "LangGraph", "LangChain", "Groq", "MCP", "PostgreSQL", "Tavily", "AviationStack", "HITL", "AI Guardrails", "Docker"],
       "link": null,
-      "github": null,
+      "github": "https://github.com/pramod213/Multi-Agent-System-using-LangGraph-MCP-Supervisor-Guardrails-HITL",
       "featured": true,
       "highlights": [
         "Multi-agent architecture with Supervisor Agent coordination",
@@ -236,7 +236,7 @@
       "description": "A Retrieval-Augmented Generation system for HR policy queries. Implements document ingestion, semantic chunking, vector storage with FAISS, and contextual response generation. Provides accurate, source-cited answers to employee policy questions through a Streamlit interface.",
       "technologies": ["Python", "LangChain", "Groq", "FAISS", "Sentence Transformers", "Streamlit", "RAG"],
       "link": null,
-      "github": null,
+      "github": "https://github.com/pramod213/HR-Policy-RAG-Assistant",
       "featured": true,
       "highlights": [
         "Document ingestion and semantic chunking pipeline",
