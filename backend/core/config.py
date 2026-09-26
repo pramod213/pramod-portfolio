@@ -1,4 +1,6 @@
+import json
 from pydantic_settings import BaseSettings
+from pydantic import field_validator
 from functools import lru_cache
 from typing import List
 
@@ -13,6 +15,19 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = False
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, v):
+        if isinstance(v, str):
+            try:
+                parsed = json.loads(v)
+                if isinstance(parsed, list):
+                    return parsed
+            except json.JSONDecodeError:
+                pass
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
 
 
 @lru_cache

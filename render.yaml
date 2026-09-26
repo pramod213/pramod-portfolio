@@ -39,7 +39,7 @@ services:
           name: portfolio-frontend
           type: web
           property: host
-        transform: '["https://${host}"]'
+        transform: "https://${host}"
       - key: FRONTEND_URL
         fromService:
           name: portfolio-frontend
