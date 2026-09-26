@@ -96,7 +96,7 @@ export function Footer({ profile }) {
           </p>
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com/pramodkmahato"
+              href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary transition-colors duration-fast text-body-sm"
@@ -106,7 +106,7 @@ export function Footer({ profile }) {
               <span>Source Code</span>
             </a>
             <a
-              href="https://linkedin.com/in/pramodkmahato"
+              href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary transition-colors duration-fast text-body-sm"

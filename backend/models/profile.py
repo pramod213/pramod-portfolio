@@ -50,6 +50,11 @@ class Achievement(BaseModel):
     icon: str
 
 
+class Resume(BaseModel):
+    url: str
+    downloadName: Optional[str] = None
+
+
 class Profile(BaseModel):
     name: str
     title: str
@@ -58,7 +63,7 @@ class Profile(BaseModel):
     github: Optional[str] = None
     linkedin: Optional[str] = None
     twitter: Optional[str] = None
-    resume: Optional[str] = None
+    resume: Optional[Resume] = None
     skills: List[Skill] = []
     projects: List[Project] = []
     experience: List[Experience] = []

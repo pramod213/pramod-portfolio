@@ -2,10 +2,13 @@
   "name": "Pramod Kumar Mahato",
   "title": "AI / Machine Learning Engineer | Full Stack Developer",
   "bio": "AI/ML Engineer specializing in building production-ready intelligent systems. Expertise in LangChain, LangGraph, RAG pipelines, Multi-Agent Systems, and FastAPI. Passionate about bridging the gap between AI research and real-world applications through robust engineering practices.",
-  "email": "pramodkmahato@gmail.com",
-  "github": "https://github.com/pramodkmahato",
-  "linkedin": "https://linkedin.com/in/pramodkmahato",
-  "resume": null,
+  "email": "pramodkumar93344@gmail.com",
+  "github": "https://github.com/pramod213",
+  "linkedin": "https://linkedin.com/in/pram21",
+  "resume": {
+    "url": "/resume.pdf",
+    "downloadName": "Pramod_Kumar_Mahato_Resume.pdf"
+  },
   "skills": [
     {
       "name": "LangChain",
@@ -251,7 +254,7 @@
       "id": "intern-excellence",
       "role": "Full Stack Developer Intern",
       "company": "Excellence Technologies Pvt. Ltd.",
-      "period": "April 2026 \u2013 July 2026",
+      "period": "April 2026 – July 2026",
       "location": "Noida Sector 8",
       "description": "Developed production-grade AI/ML applications using Python, FastAPI, LangChain, and LangGraph. Built TripMate AI (multi-agent travel system) and HR Policy RAG Assistant. Worked with Groq, FAISS, PostgreSQL, MCP, and Docker for containerized deployment.",
       "technologies": ["Python", "FastAPI", "JavaScript", "Streamlit", "LangChain", "LangGraph", "Groq", "FAISS", "PostgreSQL", "MCP", "Docker"]
@@ -274,7 +277,7 @@
       "degree": "Bachelor of Technology",
       "field": "Computer Science & Engineering",
       "institution": "Roorkee Institute of Technology",
-      "period": "2021 \u2013 2025",
+      "period": "2021 – 2025",
       "description": "Focus on AI/ML, Data Structures, Algorithms, and Software Engineering"
     }
   ]

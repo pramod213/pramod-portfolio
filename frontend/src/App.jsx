@@ -8,6 +8,7 @@ import { Experience } from './components/sections/Experience';
 import { Projects } from './components/sections/Projects';
 import { Achievements } from './components/sections/Achievements';
 import { Contact } from './components/sections/Contact';
+import { Resume } from './components/sections/Resume';
 import { usePortfolio } from './hooks/usePortfolio';
 
 function PortfolioContent({ profile }) {
@@ -19,6 +20,7 @@ function PortfolioContent({ profile }) {
       <Experience profile={profile} />
       <Projects profile={profile} />
       <Achievements profile={profile} />
+      <Resume profile={profile} />
       <Contact profile={profile} />
     </main>
   );

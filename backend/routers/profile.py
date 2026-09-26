@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from fastapi import APIRouter, HTTPException, status
-from models.profile import Profile, Skill, Project, Experience, Education
+from models.profile import Profile, Skill, Project, Experience, Education, Resume
 
 router = APIRouter(prefix="/portfolio", tags=["portfolio"])
 
@@ -39,6 +39,9 @@ async def get_profile() -> Profile:
     education = [Education(**e) for e in data.get("education", [])]
     achievements = data.get("achievements", [])
 
+    resume_data = data.get("resume")
+    resume = Resume(**resume_data) if resume_data else None
+
     return Profile(
         name=data.get("name", ""),
         title=data.get("title", ""),
@@ -47,7 +50,7 @@ async def get_profile() -> Profile:
         github=data.get("github"),
         linkedin=data.get("linkedin"),
         twitter=data.get("twitter"),
-        resume=data.get("resume"),
+        resume=resume,
         skills=skills,
         projects=projects,
         experience=experience,

@@ -117,9 +117,8 @@ export function Hero({ profile }) {
                   variant="ghost"
                   size="lg"
                   as="a"
-                  href={profile.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={profile.resume.url}
+                  download={profile.resume.downloadName}
                 >
                   Download Resume
                   <ExternalLink className="w-4 h-4" aria-hidden="true" />
