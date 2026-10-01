@@ -11,11 +11,7 @@ services:
     healthCheckPath: /
     envVars:
       - key: VITE_API_BASE_URL
-        fromService:
-          name: portfolio-backend
-          type: web
-          property: host
-        transform: "https://${host}/api/v1"
+        value: https://portfolio-backend-os06.onrender.com/api/v1
 
   # Backend Web Service
   - type: web
