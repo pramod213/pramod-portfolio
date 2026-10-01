@@ -31,11 +31,7 @@ services:
       - key: API_V1_PREFIX
         value: /api/v1
       - key: CORS_ORIGINS
-        fromService:
-          name: portfolio-frontend
-          type: web
-          property: host
-        transform: "https://${host}"
+        value: https://portfolio-frontend-os06.onrender.com
       - key: FRONTEND_URL
         fromService:
           name: portfolio-frontend
