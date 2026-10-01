@@ -1,6 +1,7 @@
 import os
 import pytest
 from core.config import Settings
+from pydantic import ValidationError
 
 
 def test_cors_origins_json_array():
@@ -41,10 +42,32 @@ def test_cors_origins_whitespace_trimmed():
     assert settings.cors_origins == ["https://a.example.com", "https://b.example.com"]
 
 
-def test_cors_origins_invalid_json_fallback():
+def test_cors_origins_invalid_json_rejected():
     os.environ["CORS_ORIGINS"] = "not-json-at-all"
-    settings = Settings()
-    assert settings.cors_origins == ["not-json-at-all"]
+    with pytest.raises(ValidationError) as exc_info:
+        Settings()
+    assert "Invalid CORS origin" in str(exc_info.value)
+
+
+def test_cors_origins_invalid_origin_rejected():
+    os.environ["CORS_ORIGINS"] = "not-a-url"
+    with pytest.raises(ValidationError) as exc_info:
+        Settings()
+    assert "Invalid CORS origin" in str(exc_info.value)
+
+
+def test_cors_origins_mixed_valid_invalid_rejected():
+    os.environ["CORS_ORIGINS"] = "https://valid.com,not-a-url"
+    with pytest.raises(ValidationError) as exc_info:
+        Settings()
+    assert "Invalid CORS origin" in str(exc_info.value)
+
+
+def test_cors_origins_path_not_allowed():
+    os.environ["CORS_ORIGINS"] = "https://example.com/some/path"
+    with pytest.raises(ValidationError) as exc_info:
+        Settings()
+    assert "Invalid CORS origin" in str(exc_info.value)
 
 
 def test_cors_origins_defaults():
